@@ -1,0 +1,233 @@
+# -*- coding: utf-8 -*-
+"""
+"I do not know its name. If I am forced to give it a name, I call it Path, and I name it as supreme."
+Laozi
+"""
+
+####
+# Required variables
+#####################
+
+from pathlib import Path
+
+BASE_PATH = Path().absolute()
+
+RAW_DATA_PATH = BASE_PATH / "raw_data"
+PICKLE_DATA_PATH = BASE_PATH / "data"
+PERSISTENT_DATA_PATH = BASE_PATH / "data_persistent"
+REFERENCE_DATA_PATH = BASE_PATH / "reference_data"
+BUSINESS_CLIENTS_DATA = BASE_PATH / "business_clients/data"
+BUSINESS_CLIENTS_MOCKS = BASE_PATH / "tests/business_clients/data"
+FUNCTIONAL_TESTS_DATA_PATH = BASE_PATH / "functional_tests/data"
+STATIC_REFERENCE_DATA_PATH = REFERENCE_DATA_PATH / "json"
+
+####
+# Variable declarations
+########################
+
+##
+# TODO: Remove commented lines after check we don't use these anymore
+##
+
+# CLIENTS
+
+MATCHA_MIX_SPIRIT_DRIVE_FILE_ID = "1bjX_Dv0VjiOIui5VfjydPSsIqiF-j3s0xN09NjoD8lE"
+MATCHA_MIX_SPIRIT_DRIVE_SHEET_NAME = "Engine export"
+MATCHA_MIX_SPIRIT_DRIVE_LOCAL_FILE_PATH = BUSINESS_CLIENTS_DATA / "matcha_mix_2_spirits.csv"
+
+MATCHA_MIX_BEER_DRIVE_FILE_ID = "1NUs6r-gETNBZm91NNq83hkf8tn0sWRm_Yoc_6Rnr0ds"
+MATCHA_MIX_BEER_DRIVE_SHEET_NAME = "Export engine"
+MATCHA_MIX_BEER_DRIVE_LOCAL_FILE_PATH = BUSINESS_CLIENTS_DATA / "matcha_mix_2_beers.csv"
+
+THE_GRAPE_BUNCH_DRIVE_FILE_ID = "1oxkm9M3uZBvUh9X7YeAHNS0pmihCs6xdPNqU8VFmDxM"
+THE_GRAPE_BUNCH_DRIVE_SHEET_NAME = "Import Matcha Editeur"
+THE_GRAPE_BUNCH_DRIVE_LOCAL_FILE_PATH = BUSINESS_CLIENTS_DATA / "theGrapeBunch_wines.csv"
+
+V_AND_B_DRIVE_FILE_ID = "1GxNenL4POPYKgZ7kBZQPISsjneYeCkaG2tyVCi0oj8k"
+V_AND_B_DRIVE_SHEET_NAME = "Import Matcha Vins actifs"
+V_AND_B_DRIVE_LOCAL_FILE_PATH = BUSINESS_CLIENTS_DATA / "vandb_wines.csv"
+
+BOTTLEBOOKS_DRIVE_FILE_ID = "1ssQ2UZL9KtXX1KphTm0o3QomEik-cjUEfSuwbolmFBI"
+BOTTLEBOOKS_DRIVE_SHEET_NAME = "Import Matcha actifs"
+BOTTLEBOOKS_DRIVE_LOCAL_FILE_PATH = BUSINESS_CLIENTS_DATA / "bottlebooks_wines.csv"
+
+GRAND_CHAIS_DRIVE_FILE_ID = "1JnVc5w2rr1mQKkHfYMnBP335uM0UyGXRmtofVQEfc5M"
+GRAND_CHAIS_DRIVE_SHEET_NAME = "Import Matcha actifs"
+GRAND_CHAIS_DRIVE_LOCAL_FILE_PATH = BUSINESS_CLIENTS_DATA / "grand_chais_de_france.csv"
+
+LNC_REF_LOCAL_FILE_PATH = BUSINESS_CLIENTS_DATA / "ref_lnc_spirits.csv"
+
+DRIZLY_DRIVE_FILE_ID = "1Rz2s5PPp6b5RGWa2VdDRZqmX2GWSMXfl3N6SYEwUFqw"
+DRIZLY_DRIVE_SHEET_NAME = "Drizly Matcha Products"
+DRIZLY_DRIVE_LOCAL_FILE_PATH = BUSINESS_CLIENTS_DATA / "drizly_wines.csv"
+
+# TEMPLATE_DRIVE_FILE = "17nxGrPeX3k96-FqEoVMasXT8Bo7fXEutEwIfS_6u1f4"  # V2
+
+WINE_REPORT_TEMPLATE_DRIVE_FILE = "1pxa-UdwrIOGMb5klp7uIjqIGQ_pnJyN394y9lxv6pkA"
+MULTILANG_GCDF_REPORT_TEMPLATE_DRIVE_FILE = "1g1Bm-4nvNnD2vtBcYyTOUs9lRhsA-PElyOTgNkdhJvY"
+WINE_REPORT_CORPUS_CSV_PATH = RAW_DATA_PATH / "wine_report_corpus.csv"
+
+BEV_REPORT_TEMPLATE_DRIVE_FILE = "1rEaZNeGs6wROkb7tgqyEINXXRc62VDpj6AvdJ1y7YRA"
+
+PURE_DISH_REPORT_TEMPLATE_DRIVE_FILE = "1pRbWXPqOV4Z7I3LKd18dRIGJHb9ySjOhMh35iImzvOk"
+
+# INGREDIENTS
+ING_DRIVE_FILE = "1gnFENmjUj9YoSzzXVdkxRuVR8b68PyRnwit4V_HqVsw"
+ING_DRIVE_SHEET = "Ingrédients export"
+ING_CSV_PATH = RAW_DATA_PATH / "ingredients_db.csv"
+INGREDIENT_SET_PICKLE = PICKLE_DATA_PATH / "ingredients.pickle"
+
+# CATEGORIES
+CAT_DRIVE_FILE = "1gnFENmjUj9YoSzzXVdkxRuVR8b68PyRnwit4V_HqVsw"
+CAT_DRIVE_SHEET = "Catégories"
+CAT_CSV_PATH = RAW_DATA_PATH / "categories.csv"
+CAT_PICKLE = PICKLE_DATA_PATH / "categories.pickle"
+
+# MATRIX
+MATRIX_DRIVE_FILE = "1d-DwaQj1mmZigng3T9QWxxcvICh5MnChxN6K9SFjWdM"
+MATRIX_DRIVE_SHEET = "Matrice III - Vinolutions"
+MATRIX_CSV_PATH = RAW_DATA_PATH / "matrice2.csv"
+MATRIX_PICKLE = PICKLE_DATA_PATH / "matrix.pickle"
+
+# BIAS
+BIAS_DRIVE_FILE = "1d-DwaQj1mmZigng3T9QWxxcvICh5MnChxN6K9SFjWdM"
+BIAS_DRIVE_SHEET = "Bias"
+BIAS_CSV_PATH = RAW_DATA_PATH / "bias.csv"
+BIAS_PICKLE = PICKLE_DATA_PATH / "bias.pickle"
+
+# CALCULATOR & COEFFICIENTS
+CALCULATOR_DRIVE_FILE = "1d-DwaQj1mmZigng3T9QWxxcvICh5MnChxN6K9SFjWdM"
+CALCULATOR_DRIVE_SHEET = "Coefficients"
+COEF_DEFAULT_PATH = RAW_DATA_PATH / "coefs.csv"
+CALCULATOR_PICKLE = PICKLE_DATA_PATH / "calculator.pickle"
+
+# WINE_DB 21
+WINE_DB_DRIVE_FILE = "1thViXL1NqzTtZn-d1-4mIVRvDLOuP2Sauzl6Y8ytEmc"
+
+# ARCHETYPES
+ARCHETYPES_DRIVE_FILE = WINE_DB_DRIVE_FILE
+ARCHETYPES_DRIVE_SHEET = "Archétypes"
+ARCHETYPES_CSV_PATH = RAW_DATA_PATH / "archetypes.csv"
+
+# VARIETY
+VARIETY_DRIVE_FILE = WINE_DB_DRIVE_FILE
+VARIETY_DRIVE_SHEET = "Variety Edition"
+VARIETY_CSV_PATH = RAW_DATA_PATH / "variety.csv"
+
+# ZONE
+ZONE_DRIVE_FILE = WINE_DB_DRIVE_FILE
+ZONE_DRIVE_SHEET = "Zone Edition"
+ZONE_CSV_PATH = RAW_DATA_PATH / "zone.csv"
+MAPS_URL = "https://resources.matcha.wine/maps/"
+
+# STYLE
+STYLE_DRIVE_FILE = WINE_DB_DRIVE_FILE
+STYLE_DRIVE_SHEET = "Zone Style Edition"
+STYLE_CSV_PATH = RAW_DATA_PATH / "style.csv"
+
+# VINTAGES
+VINTAGE_DRIVE_FILE = "1jMb9boWs6nkahb95mLFl-Oa8Ei_KckPWf8h4l_2opZE"
+VINTAGE_DRIVE_SHEET = "Millésimes Mod"
+VINTAGE_CSV_PATH = RAW_DATA_PATH / "vintage.csv"
+
+# FUNFACTS
+FUNFACTS_DRIVE_FILE = "14b9ONAyZvnGr0VuVFR9Brqq9myn7vf7xK9Q4Ki19AfU"
+FUNFACTS_DRIVE_SHEET = "Anecdotes export"
+FUNFACTS_CSV_PATH = RAW_DATA_PATH / "funfacts.csv"
+
+# TESTS
+DISH_CORPUS_DRIVE_FILE = "1Qmo6KefJKD-YRJq_bY0CJbuURafXpIIj8ZwBGpQ9n7Y"
+DISH_CORPUS_PICKLE = PICKLE_DATA_PATH / "dish_corpus.pickle"
+DISH_CORPUS_CSV_PATH = RAW_DATA_PATH / "dish_corpus.csv"
+
+DISH_CORPUS_DRIVE_SHEET = "Toutes les sources"
+
+# RECIPES
+RECIPES_DRIVE_FILE = "1rDiehBCy1YRhEf2zpZNeNiEPbbIWCt0TddtrqQcpF-A"
+RECIPES_DRIVE_SHEET = "Feuille 1"
+RECIPES_CSV_PATH = RAW_DATA_PATH / "recipes.csv"
+
+# DISH_COEFS
+DISH_COEF_DRIVE_FILE = "1d-DwaQj1mmZigng3T9QWxxcvICh5MnChxN6K9SFjWdM"
+DISH_COEF_DRIVE_SHEET = "Coefficients Plat"
+DISH_COEF_CSV_PATH = RAW_DATA_PATH / "dish_coefs.csv"
+DISH_COEF_PICKLE = PERSISTENT_DATA_PATH / "dish_coefs.pickle"
+
+# MANUAL_PORTRAITS
+MANUAL_PORTRAITS_DRIVE_FILE = "1Qmo6KefJKD-YRJq_bY0CJbuURafXpIIj8ZwBGpQ9n7Y"
+# MANUAL_PORTRAITS_DRIVE_SHEET = "Portrait robot manuel Vin ideal"
+MANUAL_PORTRAITS_DRIVE_SHEET = "Portrait robot manuel Vin ideal LBA"
+MANUAL_PORTRAITS_CSV_PATH = RAW_DATA_PATH / "manual_portraits.csv"
+MANUAL_PORTRAITS_PICKLE = PICKLE_DATA_PATH / "manual_portraits.pickle"
+
+# BATCH MATCH
+BATCH_MATCH_CSV_PATH = RAW_DATA_PATH / "batch_match.csv"
+
+# TAG CONF
+TAG_CONF_DRIVE_FILE = TAGS_DRIVE_FILE = "1kuBvRCJbvrIhFBAPTC3qlqzfPJYz7KQ6RS2nIstYoJU"
+TAG_CONF_DRIVE_SHEET = "Liste tags"
+TAG_CONF_CSV_PATH = RAW_DATA_PATH / "tag_conf.csv"
+
+TAG_GAZETTE_DRIVE_SHEET = "Gazette tags"
+
+# WINE LINGO
+WINE_LINGO_FILE = PICKLE_DATA_PATH / "wine_lingo.csv"
+LINGO_DRIVE_FILE = TAGS_DRIVE_FILE
+LINGO_DRIVE_SHEET = "Mots du vin"
+
+# RECIPES CORPUS
+RECIPE_DICT_PATH = PICKLE_DATA_PATH / "recipes.dict"
+RECIPE_CORPUS_PATH = PICKLE_DATA_PATH / "recipes.mm"
+
+# Justification
+PAIRING_JUSTIFICATION_DRIVE_FILE = "1nYNOU9M2oKZRF4CFdjrupxqJyZjNoRHBGrSk0xL3RhY"
+PAIRING_JUSTIFICATION_DRIVE_SHEET = "engine export english"
+
+# Chatbot's Bot structure
+BOT_STRUCTURE_DRIVE_FILE = "1Xl4MHcOTs1nZyFN65ZWTSj1IciBIluc0K-IpBUqnaLY"
+WINE_NAME_GAZETTE_DRIVE_SHEET = "Gazette noms de vins"
+
+
+# expression
+EXPRESSION_DRIVE_FILE = "1e_HL3M-Cc3jtGiD_RoD25c4ymdrKB08-G_wZLk3YoAo"
+EXPRESSION_DRIVE_SHEET = "Expressions"
+
+NEO_TAGS_DRIVE_FILE = "1e_HL3M-Cc3jtGiD_RoD25c4ymdrKB08-G_wZLk3YoAo"
+NEO_TAGS_DRIVE_SHEET = "Tags engine Export"
+
+TAG_WORD_DRIVE_FILE = "1e_HL3M-Cc3jtGiD_RoD25c4ymdrKB08-G_wZLk3YoAo"
+TAG_WORD_DRIVE_SHEET = "Mots du vin export"
+
+TAG_MIDDLEWARE_DRIVE_FILE = "1e_HL3M-Cc3jtGiD_RoD25c4ymdrKB08-G_wZLk3YoAo"
+TAG_MIDDLEWARE_DRIVE_SHEET = "Middlewares export"
+TAG_MIDDLEWARE_CSV_PATH = PERSISTENT_DATA_PATH / "tags_middleware.csv"
+
+# assets
+ASSET_DRIVE_FILE = "1ivv-h6AcAXyMDXqV3Bx-B5XBQZ_nEefwOweuTFIG2V0"
+ASSET_DRIVE_SHEET = "Atouts export english"
+
+PAIRING_CORPORA_PATH = PERSISTENT_DATA_PATH / "pairing_corpora"
+
+# Bev families
+BEV_FAMILIES_DRIVE_FILE = "1_nbKLownpZO0XHj2W05kwEU5xHCIhKRcGzF1P2Ehh7Q"
+BEV_FAMILIES_DRIVE_SHEET = "Families engine export"
+BEV_FAMILIES_CSV_PATH = PERSISTENT_DATA_PATH / "bev_families.csv"
+
+# Bev Family Profiles
+BEER_FAMILY_PROFILES_DRIVE_FILE = "1_nbKLownpZO0XHj2W05kwEU5xHCIhKRcGzF1P2Ehh7Q"
+BEER_FAMILY_PROFILES_DRIVE_SHEET = "Export Bière : Profils des familles"
+BEER_FAMILY_PROFILES_CSV_PATH = PERSISTENT_DATA_PATH / "beer_family_profiles.csv"
+
+# WINE AND DISH ENCODER MODELS
+DISH_ENCODER_MODEL = "pairing_models/dish-encoder-model.h5"
+WINE_ENCODER_MODEL = "pairing_models/wine-encoder-model.h5"
+
+# WINE AND DISH FEATURES
+WINE_FEATURES = "wine_dish_features/wine_columns.csv"
+DISH_FEATURES = "wine_dish_features/dish_columns.csv"
+
+# WINE-PAIRING MODEL
+PAIRING_MODEL = "pairing_models/wine-dish-pairing-model.h5"
+
+# BEV SET GENERATOR
+GENERATOR_OUTPUT_PATH = "./"
