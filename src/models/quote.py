@@ -5,7 +5,7 @@ from dataclasses_json import DataClassJsonMixin
 from dataclasses_json.core import Json
 
 from models.pair import Pair
-from src.models.enums import TimeUnits
+from models.enums import TimeUnits
 
 
 @dataclass

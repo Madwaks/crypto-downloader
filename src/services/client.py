@@ -18,8 +18,8 @@ logger = getLogger("django")
 class BinanceClient(Client):
     @dataclass
     class Configuration:
-        api_key: str = os.get_env("BINANCE_API_KEY")
-        api_secret: str = os.get_env("BINANCE_API_SECRET")
+        api_key: str = os.getenv("BINANCE_API_KEY")
+        api_secret: str = os.getenv("BINANCE_API_SECRET")
 
     PUBLIC_API_VERSION = "v3"
 

@@ -20,8 +20,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         sys.path.insert(0, os.getcwd())
 
-        from src.services.quotes_storer import QuotesPairStorer
-        from src.models.enums import TimeUnits
+        from services.quotes_storer import QuotesPairStorer
+        from models.enums import TimeUnits
         from utils.service_provider import provide
 
         pair = options["pair"]
