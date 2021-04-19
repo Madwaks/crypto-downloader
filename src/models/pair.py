@@ -2,11 +2,15 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional
 
+from dataclasses_json import DataClassJsonMixin
+
+
 class Statuses(Enum):
     ACTIVE = "TRADING"
 
+
 @dataclass
-class Pair:
+class Pair(DataClassJsonMixin):
     symbol: str
     base_asset: str
     quote_asset: str

@@ -1,32 +1,32 @@
+from typing import NoReturn, Union
+
 from injector import singleton, inject
 
 from models.enums import TimeUnits
 from models.pair import Pair
-from services.factories.quote_pair import QuotesFactory
-from services.repositories.quote_pair import QuotesRepository
+from services.importers.quotes import QuotesImporter
+from services.repositories.pair import PairsRepository
 
 
 @singleton
 class QuotesPairStorer:
     @inject
     def __init__(
-        self, quotes_repository: QuotesRepository, quote_factory: QuotesFactory
+        self, quotes_importer: QuotesImporter, pair_repository: PairsRepository
     ):
-        self._quote_factory = quote_factory
-        self._quotes_repository = quotes_repository
+        self._pair_repository = pair_repository
+        self._quote_importer = quotes_importer
 
     def store_all_quotes(self, time_unit: TimeUnits):
-        availale_pair = self._quotes_repository.available_pair
-        breakpoint()
-        for pair_symbol in availale_pair:
-            pair = Pair.objects.get(symbol=pair_symbol)
-            self._store_quotes_for_pair_and_tu(pair, time_unit)
+        available_pair = self._pair_repository.get_available_pairs()
+        for pair in available_pair:
+            self.store_quotes_for_pair(pair, time_unit)
 
-    def _store_quotes_for_pair_and_tu(self, pair: Pair, time_unit: TimeUnits):
-        objs = self._quotes_repository.get_pair_quotes(pair, time_unit=time_unit)
-        quotes = self._quote_factory.build_quote_from_pair(
-            pair, time_unit=time_unit, objs=objs
-        )
-        for quote in quotes:
-            quote.save()
-        print(f"Successfully load {len(quotes)} quotes")
+    def store_quotes_for_pair(
+        self, pair: Union[Pair, str], time_unit: TimeUnits
+    ) -> NoReturn:
+        if isinstance(pair, str):
+            pair = self._pair_repository.get_pair_from_symbol(pair)
+
+        objs = self._quote_importer.import_quotes(pair, time_unit=time_unit)
+        print(f"Successfully load {len(objs)} quotes")

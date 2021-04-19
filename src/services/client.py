@@ -2,7 +2,7 @@ import math
 from datetime import datetime
 from logging import getLogger
 from time import sleep
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
 from binance.client import Client
 from pandas import to_datetime, DataFrame

@@ -1,8 +1,6 @@
 import os
 import sys
 
-from utils.service_provider import provide
-
 from core.management import BaseCommand
 
 
@@ -17,13 +15,19 @@ class Command(BaseCommand):
         parser.add_argument(
             "--time-unit", choices=self.choices, type=str, required=True
         )
+        parser.add_argument("--pair", type=str, required=False)
 
     def handle(self, *args, **options):
         sys.path.insert(0, os.getcwd())
 
         from src.services.quotes_storer import QuotesPairStorer
         from src.models.enums import TimeUnits
+        from utils.service_provider import provide
 
+        pair = options["pair"]
         tu = TimeUnits.from_code(options["time_unit"])
         quotes_storer = provide(QuotesPairStorer)
-        quotes_storer.store_all_quotes(time_unit=tu)
+        if not pair:
+            quotes_storer.store_all_quotes(time_unit=tu)
+        else:
+            quotes_storer.store_quotes_for_pair(pair, time_unit=tu)

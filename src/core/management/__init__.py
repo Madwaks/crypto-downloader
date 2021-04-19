@@ -1,9 +1,9 @@
-import os
-import sys
-import pkgutil
 import functools
-from pathlib import Path
+import os
+import pkgutil
+import sys
 from importlib import import_module
+from pathlib import Path
 
 from .base import BaseCommand, CommandError, CommandParser
 
@@ -120,10 +120,13 @@ class ManagementUtility:
         try:
             app_name = commands[subcommand]
         except KeyError:
-            print((
-                f'[*][r]Unknown command: [y]{subcommand}[/]\n'
-                f"[*][r]Run '[y]python {self.prog_name} help[r]' for usage.[/]"
-            ), file=sys.stderr)
+            print(
+                (
+                    f"[*][r]Unknown command: [y]{subcommand}[/]\n"
+                    f"[*][r]Run '[y]python {self.prog_name} help[r]' for usage.[/]"
+                ),
+                file=sys.stderr,
+            )
             raise SystemExit(1)
         if isinstance(app_name, BaseCommand):
             # If the command is already loaded, use it directly.
@@ -162,9 +165,11 @@ class ManagementUtility:
             if not options.args:
                 print(self.main_help_text())
             else:
-                self.fetch_command(options.args[0]).print_help(self.prog_name, options.args[0])
+                self.fetch_command(options.args[0]).print_help(
+                    self.prog_name, options.args[0]
+                )
             return 0
-        elif self.argv[1:] in (['--help'], ['-h']):
+        elif self.argv[1:] in (["--help"], ["-h"]):
             print(self.main_help_text())
             return 0
         else:

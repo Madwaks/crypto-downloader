@@ -5,9 +5,8 @@ from time import sleep
 from typing import TYPE_CHECKING, Any
 
 from binance.client import Client
-from pandas import to_datetime, DataFrame
-
 from crypto.models import Pair
+from pandas import to_datetime, DataFrame
 
 if TYPE_CHECKING:
     from crypto.services.pairs_importer import TimeUnits

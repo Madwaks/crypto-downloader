@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 
+from dataclasses_json import DataClassJsonMixin
+from dataclasses_json.core import Json
+
 from models.pair import Pair
 from src.models.enums import TimeUnits
 
 
 @dataclass
-class Quotes:
+class Quote(DataClassJsonMixin):
     timestamp: int
     open: float
     high: float
@@ -20,3 +23,8 @@ class Quotes:
     tb_base_av: Optional[float] = None
     tb_quote_av: Optional[float] = None
     time_unit: Optional[TimeUnits] = field(default_factory=TimeUnits)
+
+    def to_dict(self, encode_json=False) -> dict[str, Json]:
+        asdict = super(Quote, self).to_dict()
+        asdict["time_unit"] = self.time_unit.value
+        return asdict
