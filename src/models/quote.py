@@ -18,10 +18,6 @@ class Quote(DataClassJsonMixin):
     volume: float
     close_time: int
     pair: Pair = field(default_factory=Pair)
-    quote_av: Optional[float] = None
-    trades: Optional[int] = None
-    tb_base_av: Optional[float] = None
-    tb_quote_av: Optional[float] = None
     time_unit: Optional[TimeUnits] = field(default_factory=TimeUnits)
 
     def to_dict(self, encode_json=False) -> dict[str, Json]:

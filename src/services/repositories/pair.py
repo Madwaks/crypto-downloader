@@ -18,6 +18,9 @@ class PairsRepository:
     def __init__(self, configuration: Configuration, pair_importer: PairsImporter):
         self._config = configuration
         self._pair_importer = pair_importer
+        if not self.pair_file_path.exists():
+            self.pair_file_path.touch()
+            self.pair_file_path.write_text(json.dumps([]))
 
     @property
     def pair_file_path(self):

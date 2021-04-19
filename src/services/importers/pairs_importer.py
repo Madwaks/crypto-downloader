@@ -34,8 +34,11 @@ class PairsImporter:
     def import_all_pairs(self) -> list[Pair]:
         data = self._client.get_exchange_info()
         symbols = data["symbols"]
-        pairs = [self._build_pair(symbol_info).to_dict() for symbol_info in symbols]
-        self.pair_file_path.write_text(json.dumps(pairs, indent=4))
+        breakpoint()
+        pairs = [self._build_pair(symbol_info) for symbol_info in symbols]
+        self.pair_file_path.write_text(
+            json.dumps([pair.to_dict() for pair in pairs], indent=4)
+        )
         return pairs
 
     def _build_pair(self, symbol_info: dict[str, Any]):

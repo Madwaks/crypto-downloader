@@ -1,4 +1,6 @@
 import math
+import os
+from dataclasses import dataclass
 from datetime import datetime
 from logging import getLogger
 from time import sleep
@@ -14,7 +16,19 @@ logger = getLogger("django")
 
 
 class BinanceClient(Client):
+    @dataclass
+    class Configuration:
+        api_key: str = os.get_env("BINANCE_API_KEY")
+        api_secret: str = os.get_env("BINANCE_API_SECRET")
+
     PUBLIC_API_VERSION = "v3"
+
+    def __init__(self):
+        self._config = self.Configuration
+
+        super(BinanceClient, self).__init__(
+            api_key=self._config.api_key, api_secret=self._config.api_secret
+        )
 
     def get_needed_pair_quotes(
         self, pair: Pair, time_unit: "TimeUnits", existing_data: DataFrame
