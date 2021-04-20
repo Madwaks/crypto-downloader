@@ -15,7 +15,7 @@ class Command(BaseCommand):
         parser.add_argument(
             "--time-unit", choices=self.choices, type=str, required=True
         )
-        parser.add_argument("--pair", type=str, required=False)
+        parser.add_argument("--pair", type=str, required=True)
 
     def handle(self, *args, **options):
         sys.path.insert(0, os.getcwd())
@@ -27,7 +27,5 @@ class Command(BaseCommand):
         pair = options["pair"]
         tu = TimeUnits.from_code(options["time_unit"])
         quotes_storer = provide(QuotesPairStorer)
-        if not pair:
-            quotes_storer.store_all_quotes(time_unit=tu)
-        else:
-            quotes_storer.store_quotes_for_pair(pair, time_unit=tu)
+
+        quotes_storer.store_quotes_for_pair(pair, time_unit=tu)
