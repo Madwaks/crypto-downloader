@@ -11,5 +11,7 @@ RUN mkdir /data/json && mkdir /data/csv
 
 COPY src/ /app/.
 
-ENTRYPOINT [ "python" ]
+WORKDIR /app
+
+ENTRYPOINT [ "python", "runupdate.py" ]
 CMD []

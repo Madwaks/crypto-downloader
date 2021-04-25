@@ -10,13 +10,13 @@ from models.enums import TimeUnits
 
 @dataclass
 class Quote(DataClassJsonMixin):
-    timestamp: int
+    timestamp: str
     open: float
     high: float
     low: float
     close: float
     volume: float
-    close_time: int
+    close_time: str
     pair: Pair = field(default_factory=Pair)
     time_unit: Optional[TimeUnits] = field(default_factory=TimeUnits)
 

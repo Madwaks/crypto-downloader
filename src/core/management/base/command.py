@@ -4,6 +4,7 @@ from abc import abstractmethod, ABC
 
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
+
 class CommandError(Exception):
     """
     Exception class indicating a problem while executing a management
@@ -15,6 +16,7 @@ class CommandError(Exception):
     error) is the preferred way to indicate that something has gone
     wrong in the execution of a command.
     """
+
     pass
 
 
@@ -24,11 +26,12 @@ class CommandParser(ArgumentParser):
     SystemExit in several occasions, as SystemExit is unacceptable when a
     command is called programmatically.
     """
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def error(self, message):
-        raise CommandError(f'Error: {message}')
+        raise CommandError(f"Error: {message}")
 
 
 class BaseCommand(ABC):
@@ -52,8 +55,9 @@ class BaseCommand(ABC):
         A short description of the command, which will be printed in
         help messages.
     """
+
     # Metadata about this command.
-    help = ''
+    help = ""
 
     # Configuration shortcuts that alter various logic.
     _called_from_command_line = False
@@ -66,20 +70,20 @@ class BaseCommand(ABC):
         parse the arguments to this command.
         """
         parser = CommandParser(
-            prog=f'{os.path.basename(prog_name)} {subcommand}',
+            prog=f"{os.path.basename(prog_name)} {subcommand}",
             description=self.help or None,
             formatter_class=ArgumentDefaultsHelpFormatter,
-            **kwargs
+            **kwargs,
         )
         parser.add_argument(
-            '--settings',
+            "--settings",
             default=os.getenv("APP_SETTINGS_MODULE"),
             help="""The Python path to a settings module, e.g.
              "engine.settings.main". If this isn't provided, the
              APP_SETTINGS_MODULE environment variable will be used.""",
         )
         parser.add_argument(
-            '--pythonpath',
+            "--pythonpath",
             default=os.getenv("PYTHONPATH"),
             help='A directory to add to the Python path, e.g. "/home/user/projects/external_lib".',
         )
@@ -116,7 +120,7 @@ class BaseCommand(ABC):
             options = parser.parse_args(argv[2:])
         cmd_options = vars(options)
         # Move positional args out of options to mimic legacy optparse
-        args = cmd_options.pop('args', ())
+        args = cmd_options.pop("args", ())
         try:
             output = self.execute(*args, **cmd_options)
             if isinstance(output, (str, bytes)):
@@ -126,7 +130,7 @@ class BaseCommand(ABC):
         except Exception as e:
             if not isinstance(e, CommandError):
                 raise e
-            print(f'[*][r]{e.__class__.__name__}: {e}[/]', file=sys.stderr)
+            print(f"[*][r]{e.__class__.__name__}: {e}[/]", file=sys.stderr)
             return 1
 
     def execute(self, *args, **options):
@@ -143,4 +147,3 @@ class BaseCommand(ABC):
         this method.
         """
         pass
-

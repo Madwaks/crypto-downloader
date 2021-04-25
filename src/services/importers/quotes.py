@@ -52,6 +52,7 @@ class QuotesImporter:
             self._save_csv(data, csv_file)
         else:
             new_data = existing_data
+        new_data.drop_duplicates(["timestamp"], inplace=True)
         quotes = self._quote_factory.build_from_dataframe(new_data, pair, time_unit)
         self._save_json(json_file, quotes)
         logger.info(f"[JSON] {pair.symbol} // {time_unit.value} succeed ")
@@ -67,8 +68,21 @@ class QuotesImporter:
         new_data.to_csv(file_name, index=False)
 
     def _save_json(self, file_name_json: Path, list_quotes: list[Quote]):
+        existing_quotes = (
+            json.loads(file_name_json.read_text()) if file_name_json.exists() else []
+        )
+        existing_quotes_ts = [quote.get("timestamp") for quote in existing_quotes]
+
         file_name_json.write_text(
-            json.dumps([quote.to_dict() for quote in list_quotes], indent=4)
+            json.dumps(
+                [
+                    quote.to_dict()
+                    for quote in list_quotes
+                    if quote.timestamp not in existing_quotes_ts
+                ]
+                + existing_quotes,
+                indent=4,
+            )
         )
 
     def _merge_missing_data(
