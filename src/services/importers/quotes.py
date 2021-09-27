@@ -13,6 +13,8 @@ from models.quote import Quote
 from services.client import BinanceClient
 from services.factories.quote_pair import QuotesFactory
 
+from src.utils.etc import create_folder_and_parents
+
 logger = getLogger()
 
 
@@ -32,6 +34,9 @@ class QuotesImporter:
         self._config = configuration
         self._quote_factory = quote_factory
         self._client = client
+
+        create_folder_and_parents(self.json_folder)
+        create_folder_and_parents(self.csv_folder)
 
     @property
     def json_folder(self) -> Path:
