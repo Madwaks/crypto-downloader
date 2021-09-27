@@ -9,7 +9,7 @@ RUN pip install -r /requirements.txt
 RUN mkdir /data
 RUN mkdir /data/json && mkdir /data/csv
 
-COPY src/ /app/.
+COPY src/. /app/.
 
 WORKDIR /app
 

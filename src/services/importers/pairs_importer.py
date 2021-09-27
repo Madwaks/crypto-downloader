@@ -9,6 +9,7 @@ from injector import singleton, inject
 from models.pair import Pair
 from services.client import BinanceClient
 from services.factories.pair import PairFactory
+from utils.etc import create_folder_and_parents
 
 logger = logging.getLogger("django")
 
@@ -26,6 +27,7 @@ class PairsImporter:
         self._client = client
         self._pair_factory = pair_factory
         self._config = config
+        create_folder_and_parents(self._config.file_folder_path)
 
     @property
     def pair_file_path(self):
@@ -35,6 +37,9 @@ class PairsImporter:
         data = self._client.get_exchange_info()
         symbols = data["symbols"]
         pairs = [self._build_pair(symbol_info) for symbol_info in symbols]
+        if not self.pair_file_path.exists():
+            self.pair_file_path.touch()
+
         self.pair_file_path.write_text(
             json.dumps([pair.to_dict() for pair in pairs], indent=4)
         )

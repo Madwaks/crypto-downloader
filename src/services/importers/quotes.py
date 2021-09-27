@@ -13,7 +13,7 @@ from models.quote import Quote
 from services.client import BinanceClient
 from services.factories.quote_pair import QuotesFactory
 
-from src.utils.etc import create_folder_and_parents
+from utils.etc import create_folder_and_parents
 
 logger = getLogger()
 

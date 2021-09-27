@@ -7,7 +7,7 @@ from injector import singleton, inject
 from models.pair import Pair
 from services.importers.pairs_importer import PairsImporter
 
-from src.utils.etc import create_folder_and_parents
+from utils.etc import create_folder_and_parents
 
 
 @singleton
