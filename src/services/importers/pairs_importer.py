@@ -11,7 +11,7 @@ from services.client import BinanceClient
 from services.factories.pair import PairFactory
 from utils.etc import create_folder_and_parents
 
-logger = logging.getLogger("django")
+logger = logging.getLogger("")
 
 
 @singleton
@@ -36,6 +36,7 @@ class PairsImporter:
     def import_all_pairs(self) -> list[Pair]:
         data = self._client.get_exchange_info()
         symbols = data["symbols"]
+
         pairs = [self._build_pair(symbol_info) for symbol_info in symbols]
         if not self.pair_file_path.exists():
             self.pair_file_path.touch()
@@ -43,6 +44,9 @@ class PairsImporter:
         self.pair_file_path.write_text(
             json.dumps([pair.to_dict() for pair in pairs], indent=4)
         )
+
+        print(f"Successfully downloaded {len(pairs)} at {self.pair_file_path.absolute()}.")
+
         return pairs
 
     def _build_pair(self, symbol_info: dict[str, Any]):
