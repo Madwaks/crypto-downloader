@@ -29,4 +29,6 @@ class QuotesPairStorer:
             pair = self._pair_repository.get_pair_from_symbol(pair)
 
         objs = self._quote_importer.import_quotes(pair, time_unit=time_unit)
-        print(f"Successfully load {len(objs)} quotes")
+        print(
+            f"Successfully load {len(objs)} quotes in {self._quote_importer.json_folder.absolute()}"
+        )
