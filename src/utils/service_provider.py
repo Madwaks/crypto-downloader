@@ -9,7 +9,7 @@ T = TypeVar("T")
 
 
 _injector: Optional[Injector] = None
-data_folder = Path(os.getenv("CRYPTO_QUOTES_FOLDER", "data/"))
+data_folder = Path(os.getenv("CRYPTO_QUOTES_FOLDER", "/data"))
 
 
 def _configure_crypto_quots(binder: Binder):
