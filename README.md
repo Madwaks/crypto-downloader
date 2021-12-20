@@ -25,5 +25,5 @@ docker run -it --rm madwaks/crypto-downloader:latest importsymbols
 
 You will need to bind a folder to `/data`. Choose a folder on your local machine and add it to docker run arguments:
 ```
-docker run -it --rm -v /path/to/your/folder/data/:/app/data madwaks/crypto-downloader:latest <command> {args}
+docker run -it --rm -v /path/to/your/folder/data/:/data madwaks/crypto-downloader:latest <command> {args}
 ```
