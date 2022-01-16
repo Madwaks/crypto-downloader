@@ -7,7 +7,7 @@ from typing import Any
 from injector import singleton, inject
 
 from models.pair import Pair
-from services.client import BinanceClient
+from services.client import BinanceClient, CryptoComClient
 from services.factories.pair import PairFactory
 from utils.etc import create_folder_and_parents
 
@@ -22,7 +22,7 @@ class PairsImporter:
 
     @inject
     def __init__(
-        self, config: Configuration, client: BinanceClient, pair_factory: PairFactory
+        self, config: Configuration, client: CryptoComClient, pair_factory: PairFactory
     ):
         self._client = client
         self._pair_factory = pair_factory
@@ -34,8 +34,8 @@ class PairsImporter:
         return self._config.file_folder_path / "available_pairs.json"
 
     def import_all_pairs(self) -> list[Pair]:
-        data = self._client.get_exchange_info()
-        symbols = data["symbols"]
+        data = self._client.get_available_instruments()
+        symbols = data.get("symbols") or data.get("instruments")
 
         pairs = [self._build_pair(symbol_info) for symbol_info in symbols]
         if not self.pair_file_path.exists():

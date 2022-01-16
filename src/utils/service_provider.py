@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Type, Optional
 from typing import TypeVar
 
-from injector import Injector, Binder
+from injector import Injector, Binder, ClassAssistedBuilder
 
 T = TypeVar("T")
 
@@ -59,3 +59,10 @@ def provide(clazz: Type[T]) -> T:
     _create_injector()
 
     return _injector.get(clazz)
+
+def build(clazz: Type[T], **kwargs) -> T:
+    _create_injector()
+
+    builder: ClassAssistedBuilder = _injector.get(ClassAssistedBuilder[clazz])
+
+    return builder.build(**kwargs)

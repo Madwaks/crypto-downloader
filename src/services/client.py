@@ -6,7 +6,10 @@ from logging import getLogger
 from time import sleep
 from typing import Any
 
+from injector import inject
+import requests
 from binance.client import Client
+from injector import singleton
 from pandas import to_datetime, DataFrame
 
 from models.enums import TimeUnits
@@ -14,7 +17,24 @@ from models.pair import Pair
 
 logger = getLogger("django")
 
+@singleton
+class CryptoComClient:
+    BASE_URL = "https://api.crypto.com/v2/public"
 
+    @dataclass
+    class Configuration:
+        api_key: str = os.getenv("CRYPTOCOM_API_KEY")
+        api_secret: str = os.getenv("CRYPTOCOM_API_SECRET")
+
+    @inject
+    def __init__(self, config: Configuration):
+        self._config = config
+
+    def get_available_instruments(self):
+        req = requests.get(f"{self.BASE_URL}/get-instruments")
+        return req.json().get("result")
+
+@singleton
 class BinanceClient(Client):
     @dataclass
     class Configuration:
@@ -23,8 +43,9 @@ class BinanceClient(Client):
 
     PUBLIC_API_VERSION = "v3"
 
-    def __init__(self):
-        self._config = self.Configuration
+    @inject
+    def __init__(self, config: Configuration):
+        self._config = config
 
         super(BinanceClient, self).__init__(
             api_key=self._config.api_key, api_secret=self._config.api_secret
